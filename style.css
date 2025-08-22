@@ -53,10 +53,38 @@ body {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     overflow-x: auto;
+    /* Ajustes para espaçamento e visual */
+    padding: 1.5rem 1rem;
+    gap: 2rem;
 }
 .testimonial-card {
     scroll-snap-align: center;
     flex: 0 0 80%; /* Ajusta o tamanho do card no carrossel */
+    background-color: #ffffff; /* Cor de fundo mais clara e elegante */
+    color: #1f2937; /* Cor do texto mais escura para contraste */
+    padding: 2.5rem; /* Aumenta o padding interno para um visual mais clean */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Sombra suave para um visual elegante */
+    border: 1px solid #e2e8f0; /* Borda ainda mais suave */
+    border-radius: 1.5rem; /* Cantos mais arredondados */
+    transition: all 0.3s ease-in-out;
+    position: relative; /* Necessário para posicionar o pseudo-elemento */
+    overflow: hidden; /* Garante que o gradiente não transborde */
+}
+.testimonial-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+/* Adiciona a "ilustração" de fundo elegante */
+.testimonial-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(12,21,42,0.1) 0%, rgba(12,21,42,0) 70%);
+    transform: rotate(45deg);
+    pointer-events: none;
 }
 @media (min-width: 768px) {
     .testimonial-card {
@@ -68,13 +96,45 @@ body {
     scroll-snap-type: x mandatory;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    
+    /* Ajustes para espaçamento e visual */
+    padding: 1.5rem 1rem;
+    gap: 2rem;
 }
 .activity-card {
     scroll-snap-align: start;
     flex: 0 0 90%; /* Ajusta o tamanho do card para 90% da largura do contêiner */
-     padding: 95px 60px;
+    padding: 6rem; /* Aumenta o padding para melhor visibilidade do texto */
+    position: relative;
+    overflow: hidden;
+    /* Estilo de fundo para um visual mais moderno, sem gradiente sobre a imagem */
+    background-color: #0c152a; /* Cor de fundo sólida */
+    border-radius: 1.5rem;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+.activity-card:hover {
+    transform: scale(1.03); /* Aumenta o tamanho no hover */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.activity-card h4, .activity-card p {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto para melhor legibilidade */
+    position: relative; /* Garante que o texto fique acima do pseudo-elemento */
+    z-index: 2;
+}
+/* Adiciona a "ilustração" de fundo elegante e sutil */
+.activity-card::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: rotate(-30deg);
+    pointer-events: none;
+    z-index: 1;
+}
+
 @media (min-width: 768px) {
     .activity-card {
         flex: 0 0 45%; /* Mostra dois cards por vez em telas maiores */
@@ -82,7 +142,7 @@ body {
 }
 @media (min-width: 1024px) {
     .activity-card {
-        flex: 0 0 50%; /* Mostra três cards por vez em telas maiores */
+        flex: 0 0 30%; /* Mostra três cards por vez em telas maiores */
         
     }
 }
@@ -133,6 +193,10 @@ body {
 }
 #mobile-menu .dropdown-menu-content a {
     padding: 0.5rem;
+    color: white; /* Adicionado para corrigir a cor do texto no mobile */
+}
+#mobile-menu .dropdown-menu-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Efeito de hover */
 }
 #mobile-menu button {
     color: white;
@@ -170,4 +234,75 @@ body {
 .carousel-button svg {
     width: 24px;
     height: 24px;
+}
+
+/* Estilos para a seção "Nossos Pilares" - NOVO VISUAL TIPO DRIBBBLE */
+.pillars-card {
+    position: relative;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid #e2e8f0;
+}
+.pillars-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+/* O fundo foi removido para um visual mais limpo na seção como um todo */
+.pillars-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: none; /* A imagem de fundo foi removida daqui */
+    border-radius: 1.5rem;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.pillars-card .content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+/* Estilos para o ícone e o título */
+.pillars-card .icon-container {
+    background-color: #0c152a;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+/* Adiciona um gradiente sutil no ícone */
+.pillars-card .icon-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.pillars-card .icon-container svg {
+    width: 36px;
+    height: 36px;
+    color: white;
+}
+.pillars-card h3 {
+    font-size: 1.75rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    color: #1a202c; /* cor escura */
+    margin-bottom: 0.5rem;
+}
+.pillars-card p {
+    font-size: 1rem; /* text-base */
+    color: #4a5568; /* cor de texto */
+    line-height: 1.6;
 }

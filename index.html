@@ -79,7 +79,7 @@
                             </svg>
                         </span>
                         <div class="dropdown-menu-content">
-                            <a href="#contato">Fale Conosco</a>
+                            <a href="#fale-conosco">Fale Conosco</a>
                             <a href="#">Localização</a>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                 </svg>
             </button>
             <div class="dropdown-menu-content bg-transparent text-white text-lg space-y-2">
-                <a href="#contato" class="block">Fale Conosco</a>
+                <a href="#fale-conosco" class="block">Fale Conosco</a>
                 <a href="#">Localização</a>
             </div>
         </div>
@@ -180,7 +180,7 @@
                 O Colégio Cívico Militar Dom Pedro I é o lugar onde disciplina e excelência se encontram para formar os líderes de amanhã.
             </p>
             
-            <a href="#contato" class="px-10 py-4 bg-white text-blue-950 font-bold text-lg rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
+            <a href="#fale-conosco" class="px-10 py-4 bg-white text-blue-950 font-bold text-lg rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
                 Agende Sua Visita
             </a>
         </div>
@@ -207,43 +207,57 @@
         </div>
     </section>
 
-    <!-- Seção Nossos Pilares com cards modernos -->
-    <section id="proposta" class="py-20 bg-blue-950 text-white p-4">
+    <!-- Seção Nossos Pilares com fundo azul escuro -->
+    <section id="proposta" class="relative py-20 p-4 bg-blue-950">
         <div class="container mx-auto section-animation">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 leading-tight">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 leading-tight text-white">
                 Nossos Pilares de Ensino
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-white text-blue-950 p-8 rounded-xl shadow-xl hover-lift transition-all duration-300 text-center">
-                    <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 21h20L12 2zm0 15L6 7h12l-6 10z"/>
-                    </svg>
-                    <h3 class="text-2xl font-bold mb-2">Disciplina Cívica</h3>
-                    <p class="text-gray-600"> Ensinamos o respeito e a ordem como base para o desenvolvimento pessoal e acadêmico. </p>
+                <div class="pillars-card">
+                    <div class="content-wrapper">
+                        <div class="icon-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3>Disciplina Cívica</h3>
+                        <p> Ensinamos o respeito e a ordem como base para o desenvolvimento pessoal e acadêmico. </p>
+                    </div>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-white text-blue-950 p-8 rounded-xl shadow-xl hover-lift transition-all duration-300 text-center">
-                    <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 4a8 8 0 110 16 8 8 0 010-16zM12 6a6 6 0 100 12 6 6 0 000-12zM12 8a4 4 0 100 8 4 4 0 000-8z"/>
-                    </svg>
-                    <h3 class="text-2xl font-bold mb-2">Excelência Acadêmica</h3>
-                    <p class="text-gray-600"> Um corpo docente qualificado e uma proposta pedagógica que desafia e inspira os alunos. </p>
+                <div class="pillars-card">
+                    <div class="content-wrapper">
+                        <div class="icon-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap">
+                                <path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2Z"/>
+                                <path d="m6 10-3 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8l-3-2"/>
+                                <path d="M16 14a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2z"/>
+                            </svg>
+                        </div>
+                        <h3>Excelência Acadêmica</h3>
+                        <p> Um corpo docente qualificado e uma proposta pedagógica que desafia e inspira os alunos. </p>
+                    </div>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-white text-blue-950 p-8 rounded-xl shadow-xl hover-lift transition-all duration-300 text-center">
-                    <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2c-4.41 0-8 3.59-8 8s3.59 8 8 8c1.32 0 2.56-.32 3.66-.9L18 22l-1.9-4.14c.91-1.1.91-2.52.02-3.62l-1.37-1.37c-1.12.92-2.54 1.43-4.14 1.43-4.41 0-8-3.59-8-8s3.59-8 8-8z"/>
-                    </svg>
-                    <h3 class="text-2xl font-bold mb-2">Liderança</h3>
-                    <p class="text-gray-600"> Cultivamos o patriotismo, a ética e o senso de responsabilidade social em nossos estudantes. </p>
+                <div class="pillars-card">
+                    <div class="content-wrapper">
+                        <div class="icon-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown">
+                                <path d="m14 6 4-2 4 2v20h-24v-20l4-2 4 2 2-2z"/>
+                            </svg>
+                        </div>
+                        <h3>Liderança</h3>
+                        <p> Cultivamos o patriotismo, a ética e o senso de responsabilidade social em nossos estudantes. </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Seção de Cursos e Atividades (com estilo Apple) -->
-    <section id="cursos" class="py-20 p-4 bg-gray-100">
+    <section id="cursos" class="py-20 p-4 bg-gray-200">
         <div class="container mx-auto section-animation">
             <!-- Título principal em destaque, alinhado à esquerda -->
             <h2 class="text-4xl md:text-5xl font-extrabold text-blue-950 mb-16 leading-tight">
@@ -271,7 +285,7 @@
                         <p class="text-white text-lg leading-relaxed mb-6">
                             Domine a arte da programação. Do front-end ao back-end, prepare-se para criar softwares, aplicativos e websites que moldarão o futuro da tecnologia.
                         </p>
-                        <a href="#contato" class="inline-flex items-center px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
+                        <a href="#fale-conosco" class="inline-flex items-center px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
                             Saiba Mais
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
@@ -295,16 +309,20 @@
                         <p class="text-white text-lg leading-relaxed mb-6">
                             Explore o mundo da automação e da inteligência artificial. Nossos alunos aprendem a construir, programar e controlar robôs, combinando eletrônica com lógica e criatividade.
                         </p>
-                        <a href="#contato" class="inline-flex items-center px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
+                        <a href="#fale-conosco" class="inline-flex items-center px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
                             Saiba Mais
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Seção de Atividades (com carrossel) -->
-            <h2 class="text-4x1 md:text-5xl font-extrabold text-blue-950 mb-10 leading-tight">
+    <!-- Nova Seção de Atividades (com carrossel) -->
+    <section id="atividades" class="py-20 p-4 bg-white">
+        <div class="container mx-auto section-animation">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-blue-950 mb-10 leading-tight">
                 Atividades que nos definem.
             </h2>
             <div class="relative">
@@ -316,7 +334,6 @@
                         <!-- Sobreposição simplificada para melhor performance -->
                         <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
-                            <span class="text-5xl mb-4"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Futsal</h4>
                             <p class="text-white leading-relaxed">Desenvolvimento de trabalho em equipe, estratégia e liderança em quadra.</p>
                         </div>
@@ -328,7 +345,6 @@
                         <!-- Sobreposição simplificada para melhor performance -->
                         <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
-                            <span class="text-5xl mb-4"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Tênis de Mesa</h4>
                             <p class="text-white leading-relaxed">Agilidade, coordenação e foco em um esporte dinâmico e divertido.</p>
                         </div>
@@ -340,7 +356,6 @@
                         <!-- Sobreposição simplificada para melhor performance -->
                         <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
-                            <span class="text-5xl mb-4 text-white-8000"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Xadrez</h4>
                             <p class="text-white leading-relaxed">Aprimore o raciocínio lógico, a tomada de decisões e a paciência.</p>
                         </div>
@@ -352,7 +367,6 @@
                         <!-- Sobreposição simplificada para melhor performance -->
                         <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
-                            <span class="text-5xl mb-4"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Vôlei</h4>
                             <p class="text-white leading-relaxed">Trabalho em Equipe, coordenação, estratégia e foco</p>
                         </div>
@@ -374,58 +388,71 @@
         </div>
     </section>
 
-    <!-- Seção Fale Conosco -->
-    <section id="fale-conosco" class="py-20 p-4 bg-white">
-        <div class="container mx-auto section-animation">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-                <!-- Lado esquerdo com texto e ícones -->
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-blue-950 mb-4 leading-tight">
-                        Fale conosco!
-                    </h2>
-                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
-                        Estamos prontos para responder às suas perguntas. Envie-nos uma mensagem e agende sua visita à nossa escola para conhecer a nossa proposta de perto.
-                    </p>
-                    <!-- Contato e Endereço -->
+    <!-- Seção Fale Conosco aprimorada -->
+    <section id="fale-conosco" class="py-20 p-4 bg-gray-100 relative overflow-hidden" style="background-image: url('https://placehold.co/1920x1080/000000/1e293b?text=Fundo+Moderno+Abstrato'); background-size: cover; background-position: center;">
+        <!-- Overlay para escurecer a imagem de fundo e garantir legibilidade -->
+        <div class="absolute inset-0 bg-blue-950/80"></div>
+        
+        <div class="container mx-auto section-animation relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                    Fale Conosco!
+                </h2>
+                <p class="text-lg text-gray-200">
+                    Estamos prontos para responder às suas perguntas. Envie-nos uma mensagem e agende sua visita.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Lado esquerdo: Localização e Contato -->
+                <div class="bg-blue-950/70 p-8 rounded-xl shadow-xl flex flex-col space-y-8 text-gray-200">
+                    <h3 class="text-3xl font-bold text-white mb-4">Nossa Localização</h3>
+                    <!-- Mapa do Google Maps (iframe) -->
+                    <div class="w-full h-80 rounded-lg overflow-hidden shadow-md">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.268759325983!2d-49.2678659850117!3d-25.430030083788734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce41865c36335%3A0xf659695d8525700!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1625078500201!5m2!1spt-BR!2sbr" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+
+                    <!-- Detalhes de Contato -->
                     <div class="space-y-4">
-                        <div class="flex items-center space-x-3">
-                            <svg class="w-8 h-8 text-blue-950" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start space-x-3">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2c-4.41 0-8 3.59-8 8s3.59 8 8 8c1.32 0 2.56-.32 3.66-.9L18 22l-1.9-4.14c.91-1.1.91-2.52.02-3.62l-1.37-1.37c-1.12.92-2.54 1.43-4.14 1.43-4.41 0-8-3.59-8-8s3.59-8 8-8z"/>
                             </svg>
                             <div>
-                                <h5 class="text-lg font-bold text-blue-950">Telefone e Email</h5>
-                                <p class="text-gray-600">(41) 99999-9999</p>
-                                <p class="text-gray-600">contato@dompedroi.edu.br</p>
+                                <h5 class="text-lg font-bold text-white">Telefone e Email</h5>
+                                <p class="text-gray-200">(41) 99999-9999</p>
+                                <p class="text-gray-200">contato@dompedroi.edu.br</p>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-3">
-                            <svg class="w-8 h-8 text-blue-950" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start space-x-3">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2c-4.41 0-8 3.59-8 8s3.59 8 8 8c1.32 0 2.56-.32 3.66-.9L18 22l-1.9-4.14c.91-1.1.91-2.52.02-3.62l-1.37-1.37c-1.12.92-2.54 1.43-4.14 1.43-4.41 0-8-3.59-8-8s3.59-8 8-8z"/>
                             </svg>
                             <div>
-                                <h5 class="text-lg font-bold text-blue-950">Endereço</h5>
-                                <p class="text-gray-600">Rua das Acácias, 1234 - Curitiba, PR</p>
+                                <h5 class="text-lg font-bold text-white">Endereço</h5>
+                                <p class="text-gray-200">Rua das Acácias, 1234 - Curitiba, PR</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Lado direito com o formulário de contato -->
-                <div class="md:w-1/2 w-full p-8 rounded-xl shadow-xl bg-gray-50">
+                <!-- Lado direito: Formulário de Contato -->
+                <div class="bg-blue-950/70 p-8 rounded-xl shadow-xl">
+                    <h3 class="text-3xl font-bold text-white mb-6">Envie uma Mensagem</h3>
                     <form action="#" method="POST" class="space-y-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">Seu Nome Completo</label>
-                            <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2">
+                            <label for="name" class="block text-sm font-medium text-gray-200">Seu Nome Completo</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2 bg-gray-800 text-white border-none">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Seu Email</label>
-                            <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2">
+                            <label for="email" class="block text-sm font-medium text-gray-200">Seu Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2 bg-gray-800 text-white border-none">
                         </div>
                         <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700">Sua Mensagem</label>
-                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"></textarea>
+                            <label for="message" class="block text-sm font-medium text-gray-200">Sua Mensagem</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2 bg-gray-800 text-white border-none"></textarea>
                         </div>
-                        <button type="submit" class="w-full px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
+                        <button type="submit" class="w-full px-6 py-3 bg-blue-500 text-white font-bold rounded-full shadow-lg hover:bg-blue-600 transition-colors mt-6">
                             Enviar Mensagem
                         </button>
                     </form>
@@ -433,6 +460,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Seção de Depoimentos (carrossel) -->
     <section class="py-20 p-4">
@@ -443,22 +471,22 @@
             <div class="relative">
                 <div id="testimonial-carousel" class="testimonial-carousel flex overflow-x-auto snap-x space-x-8 px-4 py-8">
                     <!-- Depoimento 1 -->
-                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                    <div class="testimonial-card flex-shrink-0">
                         <p class="text-xl italic mb-4">"O Colégio Dom Pedro I mudou a vida do meu filho. A disciplina e o foco acadêmico o transformaram em um aluno mais dedicado e responsável."</p>
                         <p class="font-bold text-lg">- Maria, mãe de aluno</p>
                     </div>
                     <!-- Depoimento 2 -->
-                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                    <div class="testimonial-card flex-shrink-0">
                         <p class="text-xl italic mb-4">"Aqui, não aprendemos apenas história e matemática; aprendemos sobre respeito, ética e como nos tornarmos bons cidadãos. Recomendo de olhos fechados!"</p>
                         <p class="font-bold text-lg">- João, ex-aluno</p>
                     </div>
                     <!-- Depoimento 3 -->
-                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                    <div class="testimonial-card flex-shrink-0">
                         <p class="text-xl italic mb-4">"A qualidade de ensino é excelente e a equipe é super atenciosa. Me sinto segura sabendo que minha filha está em um ambiente que realmente se importa com o futuro dela."</p>
                         <p class="font-bold text-lg">- Ana, mãe de aluna</p>
                     </div>
                     <!-- Novo Depoimento Adicionado -->
-                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                    <div class="testimonial-card flex-shrink-0">
                         <p class="text-xl italic mb-4">"O ambiente escolar é muito inspirador. O respeito entre os alunos e a dedicação dos professores fazem toda a diferença na jornada de aprendizado."</p>
                         <p class="font-bold text-lg">- Pedro, pai de aluno</p>
                     </div>
