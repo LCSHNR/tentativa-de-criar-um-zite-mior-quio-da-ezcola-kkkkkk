@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colégio Cívico Militar Dom Pedro I</title>
+    <!-- Carrega o Tailwind CSS para estilização moderna -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para animações e tipografia */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Fundo suave */
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        .text-blue-950 {
+            color: #0c152a; /* Cor base: azul-marinho escuro */
+        }
+        .bg-blue-950 {
+            background-color: #0c152a;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .section-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section-animation.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Estilos para o vídeo de fundo */
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+        }
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 150%;
+            min-height: 150%;
+            width: auto;
+            height: auto;
+            pointer-events: none;
+        }
+        @media (min-aspect-ratio: 16/9) {
+            .hero-video {
+                height: 100%;
+                width: auto;
+            }
+        }
+        @media (max-aspect-ratio: 16/9) {
+            .hero-video {
+                height: auto;
+                width: 100%;
+            }
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .testimonial-carousel {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            overflow-x: auto;
+        }
+        .testimonial-card {
+            scroll-snap-align: center;
+            flex: 0 0 80%; /* Ajusta o tamanho do card no carrossel */
+        }
+        @media (min-width: 768px) {
+            .testimonial-card {
+                flex: 0 0 30%;
+            }
+        }
+        /* Estilos para o carrossel de atividades */
+        .activity-carousel {
+            scroll-snap-type: x mandatory;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            
+        }
+        .activity-card {
+            scroll-snap-align: start;
+            flex: 0 0 90%; /* Ajusta o tamanho do card para 90% da largura do contêiner */
+             padding: 95px 60px;
+        }
+        @media (min-width: 768px) {
+            .activity-card {
+                flex: 0 0 45%; /* Mostra dois cards por vez em telas maiores */
+            }
+        }
+        @media (min-width: 1024px) {
+            .activity-card {
+                flex: 0 0 50%; /* Mostra três cards por vez em telas maiores */
+                
+            }
+        }
+        .tab-button.active {
+            background-color: #0c152a;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        /* Estilo para simular o menu dropdown */
+        .dropdown-menu {
+            position: relative;
+        }
+        .dropdown-menu-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+        /* Estilos para o dropdown ativado via JavaScript */
+        .dropdown-menu-content.active {
+            display: block;
+        }
+        .dropdown-menu-content a {
+            color: #333;
+            padding: 0.5rem 1rem;
+            display: block;
+            border-radius: 0.25rem;
+        }
+        .dropdown-menu-content a:hover {
+            background-color: #f0f4f8;
+        }
+        /* Estilos para o menu mobile */
+        #mobile-menu .dropdown-menu {
+            width: 100%;
+            text-align: center;
+        }
+        #mobile-menu .dropdown-menu-content {
+            position: static; /* Ajusta para se encaixar no fluxo do menu mobile */
+            margin-top: 1rem;
+            box-shadow: none;
+        }
+        #mobile-menu .dropdown-menu-content a {
+            padding: 0.5rem;
+        }
+        #mobile-menu button {
+            color: white;
+            font-weight: bold;
+            font-size: 1.875rem; /* text-3xl */
+            padding: 1rem 0;
+        }
+        /* Estilos para os botões de navegação do carrossel */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 9999px; /* rounded-full */
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .carousel-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        .carousel-button.left-arrow {
+            left: 1rem;
+        }
+        .carousel-button.right-arrow {
+            right: 1rem;
+        }
+        .carousel-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Cabeçalho (Header) Fixo -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-12 bg-blue-950 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo do Colégio -->
+            <a href="#" class="flex items-center space-x-2">
+                <img src="img/ccm.png" alt="Logo do Colégio Cívico Militar do Paraná" class="w-12 h-12 rounded-full border-2 border-white">
+                <span class="text-white text-2xl font-black">
+                    C.C.M Dom Pedro I
+                </span>
+            </a>
+            
+            <!-- Grupo de navegação e busca -->
+            <div class="flex items-center space-x-6">
+                <!-- Menu de Navegação (Desktop) -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <!-- Dropdown JOGOS -->
+                    <div class="dropdown-menu">
+                        <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
+                            Sobre
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                        <div class="dropdown-menu-content">
+                            <a href="#sobre">Nossa História</a>
+                            <a href="#proposta">Proposta Pedagógica</a>
+                        </div>
+                    </div>
+                    <!-- Dropdown EXPERIÊNCIAS -->
+                    <div class="dropdown-menu">
+                        <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
+                            Ensino
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                        <div class="dropdown-menu-content">
+                            <a href="#cursos">Cursos Técnicos</a>
+                            <a href="#cursos">Esportes</a>
+                            <a href="#cursos">Atividades</a>
+                        </div>
+                    </div>
+                    <!-- Dropdown SOBRE -->
+                    <div class="dropdown-menu">
+                        <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
+                            Serviços
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                        <div class="dropdown-menu-content">
+                            <a href="#">Matrículas</a>
+                            <a href="#">Central do Aluno</a>
+                        </div>
+                    </div>
+                    <!-- Dropdown RECURSOS -->
+                    <div class="dropdown-menu">
+                        <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
+                            Contato
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                        <div class="dropdown-menu-content">
+                            <a href="#contato">Fale Conosco</a>
+                            <a href="#">Localização</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Botão de busca no canto direito -->
+                <button class="hidden md:block text-white hover:text-gray-300 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+
+                <!-- Botão de Menu para Mobile -->
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Mobile (oculto por padrão) com dropdowns -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-blue-950/95 z-40 hidden flex flex-col items-center justify-center space-y-8 md:hidden">
+        <button id="close-menu-button" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
+        <!-- Dropdown SOBRE -->
+        <div class="dropdown-menu">
+            <button class="text-white focus:outline-none flex items-center">
+                Sobre
+                <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="dropdown-menu-content bg-transparent text-white text-lg space-y-2">
+                <a href="#sobre" class="block">Nossa História</a>
+                <a href="#proposta" class="block">Proposta Pedagógica</a>
+            </div>
+        </div>
+        <!-- Dropdown ENSINO -->
+        <div class="dropdown-menu">
+            <button class="text-white focus:outline-none flex items-center">
+                Ensino
+                <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="dropdown-menu-content bg-transparent text-white text-lg space-y-2">
+                <a href="#cursos" class="block">Cursos Técnicos</a>
+                <a href="#cursos">Esportes</a>
+                <a href="#cursos">Atividades</a>
+            </div>
+        </div>
+        <!-- Dropdown SERVIÇOS -->
+        <div class="dropdown-menu">
+            <button class="text-white focus:outline-none flex items-center">
+                Serviços
+                <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="dropdown-menu-content bg-transparent text-white text-lg space-y-2">
+                <a href="#">Matrículas</a>
+                <a href="#">Central do Aluno</a>
+            </div>
+        </div>
+        <!-- Dropdown CONTATO -->
+        <div class="dropdown-menu">
+            <button class="text-white focus:outline-none flex items-center">
+                Contato
+                <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="dropdown-menu-content bg-transparent text-white text-lg space-y-2">
+                <a href="#contato" class="block">Fale Conosco</a>
+                <a href="#">Localização</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção Hero (tela cheia com vídeo de fundo e conteúdo centralizado) -->
+    <section class="relative text-white h-screen flex flex-col justify-center items-center text-center p-4">
+        <!-- Contêiner do vídeo de fundo -->
+        <div class="hero-video-container">
+            <!-- A tag video é usada para carregar o arquivo de vídeo local. -->
+            <video class="hero-video" autoplay loop muted playsinline>
+                <!-- Fonte do vídeo. Troque o valor src pelo URL do seu vídeo. -->
+                <source src="img/Vídeo institucional da CCM PR.mp4" type="video/mp4">
+                Seu navegador não suporta a tag de vídeo.
+            </video>
+        </div>
+        <div class="absolute inset-0 bg-blue-950/80"></div> <!-- Sobreposição escura -->
+        <div class="relative z-10 section-animation">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-wide mb-9">
+                Construindo o Futuro, Um Aluno de Cada Vez.
+            </h1>
+            <p class="text-lg md:text-2xl font-light mb-9 max-w-3x4">
+                O Colégio Cívico Militar Dom Pedro I é o lugar onde disciplina e excelência se encontram para formar os líderes de amanhã.
+                
+            </p>
+            
+            <a href="#contato" class="px-10 py-4 bg-white text-blue-950 font-bold text-lg rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
+                Agende Sua Visita
+            </a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre o Colégio com layout de bloco -->
+    <section id="sobre" class="py-20 p-4">
+        <div class="container mx-auto section-animation bg-white p-12 rounded-xl shadow-xl">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-blue-950">
+                        Uma História de Excelência.
+                    </h2>
+                    <p class="text-lg leading-relaxed text-gray-700 mb-4">
+                        Desde a sua fundação, o Colégio Dom Pedro I se dedica a oferecer uma educação que vai além da sala de aula. Nossa abordagem única combina o rigor acadêmico com a formação de caráter, preparando os alunos para serem cidadãos responsáveis e líderes em suas comunidades.
+                    </p>
+                    <a href="#proposta" class="inline-block px-8 py-3 bg-blue-950 text-white font-bold rounded-full hover:bg-gray-800 transition-colors">
+                        Leia Nossa Proposta Pedagógica
+                    </a>
+                </div>
+                <img src="img/fachada.png" alt="Imagem institucional do colégio" class="rounded-lg shadow-x1 w-full md:w-1/2 ">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Nossos Pilares com cards modernos -->
+    <section id="proposta" class="py-20 bg-blue-950 text-white p-4">
+        <div class="container mx-auto section-animation">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 leading-tight">
+                Nossos Pilares de Ensino
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white text-blue-950 p-8 rounded-xl shadow-xl hover-lift transition-all duration-300 text-center">
+                    <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 21h20L12 2zm0 15L6 7h12l-6 10z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-2">Disciplina Cívica</h3>
+                    <p class="text-gray-600"> Ensinamos o respeito e a ordem como base para o desenvolvimento pessoal e acadêmico. </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white text-blue-950 p-8 rounded-xl shadow-xl hover-lift transition-all duration-300 text-center">
+                    <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 4a8 8 0 110 16 8 8 0 010-16zM12 6a6 6 0 100 12 6 6 0 000-12zM12 8a4 4 0 100 8 4 4 0 000-8z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-2">Excelência Acadêmica</h3>
+                    <p class="text-gray-600"> Um corpo docente qualificado e uma proposta pedagógica que desafia e inspira os alunos. </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white text-blue-950 p-8 rounded-xl shadow-xl hover-lift transition-all duration-300 text-center">
+                    <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2c-4.41 0-8 3.59-8 8s3.59 8 8 8c1.32 0 2.56-.32 3.66-.9L18 22l-1.9-4.14c.91-1.1.91-2.52.02-3.62l-1.37-1.37c-1.12.92-2.54 1.43-4.14 1.43-4.41 0-8-3.59-8-8s3.59-8 8-8z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-2">Liderança</h3>
+                    <p class="text-gray-600"> Cultivamos o patriotismo, a ética e o senso de responsabilidade social em nossos estudantes. </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Cursos e Atividades (com estilo Apple) -->
+    <section id="cursos" class="py-20 p-4 bg-gray-100">
+        <div class="container mx-auto section-animation">
+            <!-- Título principal em destaque, alinhado à esquerda -->
+            <h2 class="text-4xl md:text-5xl font-extrabold text-blue-950 mb-16 leading-tight">
+                Acreditamos na inovação,<br> na criatividade e no futuro.
+            </h2>
+
+            <!-- Cards para Cursos Técnicos com layout visual -->
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-20 mb-7">
+                <!-- Card de Desenvolvimento de Sistemas -->
+                <div class="relative rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <!-- Camada de imagem de fundo (usando um placeholder como ilustração) -->
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/plano-de-fundo-de-programacao-com-pessoa-trabalhando-com-codigos-no-computador-scaled-1.jpg');"></div>
+                    <!-- Camada de sobreposição semitransparente com efeito de desfoque -->
+                    <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                    <!-- Conteúdo do card -->
+                    <div class="relative z-10 p-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <!-- Ícone de código em SVG -->
+                            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.6 17.4l-1.4-1.4c-1.2 1.2-2.8 1.9-4.5 1.9-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7c1.7 0 3.3.7 4.5 1.9l1.4-1.4C14.7 4.7 12.5 4 10.4 4c-4.4 0-8 3.6-8 8s3.6 8 8 8c2.1 0 4.3-.7 6.2-1.9zM20 12c0 4.4-3.6 8-8 8-2.1 0-4.3-.7-6.2-1.9l-1.4 1.4c1.9 1.9 4.1 3 6.6 3 4.4 0 8-3.6 8-8s-3.6-8-8-8c-2.5 0-4.7 1.1-6.6 3l1.4 1.4c1.9-1.9 4.1-3 6.6-3s4.7 1.1 6.6 3z"/>
+                            </svg>
+                            <h3 class="text-3xl font-extrabold text-white">Desenvolvimento de Sistemas</h3>
+                        </div>
+                        <p class="text-white text-lg leading-relaxed mb-6">
+                            Domine a arte da programação. Do front-end ao back-end, prepare-se para criar softwares, aplicativos e websites que moldarão o futuro da tecnologia.
+                        </p>
+                        <a href="#contato" class="inline-flex items-center px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
+                            Saiba Mais
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card de Robótica -->
+                <div class="relative rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/robotica_kits_2.jpg');"></div>
+                    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+                    <div class="relative z-10 p-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <!-- Ícone de robô em SVG -->
+                            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 1.5c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm-2-12h4c.55 0 1 .45 1 1s-.45 1-1 1h-4c-.55 0-1-.45-1-1s.45-1 1-1zm0 4h4c.55 0 1 .45 1 1s-.45 1-1 1h-4c-.55 0-1-.45-1-1s.45-1 1-1z"/>
+                            </svg>
+                            <h3 class="text-3xl font-extrabold text-white">Robótica</h3>
+                        </div>
+                        <p class="text-white text-lg leading-relaxed mb-6">
+                            Explore o mundo da automação e da inteligência artificial. Nossos alunos aprendem a construir, programar e controlar robôs, combinando eletrônica com lógica e criatividade.
+                        </p>
+                        <a href="#contato" class="inline-flex items-center px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
+                            Saiba Mais
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Atividades (com carrossel) -->
+            <h2 class="text-4x1 md:text-5xl font-extrabold text-blue-950 mb-10 leading-tight">
+                Atividades que nos definem.
+            </h2>
+            <div class="relative">
+                <div id="activity-carousel" class="activity-carousel flex space-x-10 px-3 py-8 -mx-4 md:mx-0">
+                    <!-- Card Esporte/Atividade 1 -->
+                    <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/curiosidades-sobre-futsal.jpg');"></div>
+                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <div class="relative z-10 p-8">
+                            <span class="text-5xl mb-4"></span>
+                            <h4 class="text-2xl font-bold mb-2 text-white">Futsal</h4>
+                            <p class="text-white leading-relaxed">Desenvolvimento de trabalho em equipe, estratégia e liderança em quadra.</p>
+                        </div>
+                    </div>
+                    <!-- Card Esporte/Atividade 2 -->
+                    <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/GettyImages-530941705.jpg');"></div>
+                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <div class="relative z-10 p-8">
+                            <span class="text-5xl mb-4"></span>
+                            <h4 class="text-2xl font-bold mb-2 text-white">Tênis de Mesa</h4>
+                            <p class="text-white leading-relaxed">Agilidade, coordenação e foco em um esporte dinâmico e divertido.</p>
+                        </div>
+                    </div>
+                    <!-- Card Esporte/Atividade 3 -->
+                    <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/beneficios-didaticos-jogo-xadrez.jpg');"></div>
+                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <div class="relative z-10 p-8">
+                            <span class="text-5xl mb-4 text-white-8000"></span>
+                            <h4 class="text-2xl font-bold mb-2 text-white">Xadrez</h4>
+                            <p class="text-white leading-relaxed">Aprimore o raciocínio lógico, a tomada de decisões e a paciência.</p>
+                        </div>
+                    </div>
+                    <!-- Card Esporte/Atividade 4 -->
+                    <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/depositphotos_118552636-stock-photo-volleyball-object-on-background.jpg');"></div>
+                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <div class="relative z-10 p-8">
+                            <span class="text-5xl mb-4"></span>
+                            <h4 class="text-2xl font-bold mb-2 text-white">Vôlei</h4>
+                            <p class="text-white leading-relaxed">Trabalho em Equipe, coordenação, estratégia e foco</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Botão de navegação esquerda -->
+                <button id="activity-prev" class="carousel-button left-arrow">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                <!-- Botão de navegação direita -->
+                <button id="activity-next" class="carousel-button right-arrow">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Fale Conosco -->
+    <section id="fale-conosco" class="py-20 p-4 bg-white">
+        <div class="container mx-auto section-animation">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <!-- Lado esquerdo com texto e ícones -->
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-blue-950 mb-4 leading-tight">
+                        Fale conosco!
+                    </h2>
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        Estamos prontos para responder às suas perguntas. Envie-nos uma mensagem e agende sua visita à nossa escola para conhecer a nossa proposta de perto.
+                    </p>
+                    <!-- Contato e Endereço -->
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-8 h-8 text-blue-950" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2c-4.41 0-8 3.59-8 8s3.59 8 8 8c1.32 0 2.56-.32 3.66-.9L18 22l-1.9-4.14c.91-1.1.91-2.52.02-3.62l-1.37-1.37c-1.12.92-2.54 1.43-4.14 1.43-4.41 0-8-3.59-8-8s3.59-8 8-8z"/>
+                            </svg>
+                            <div>
+                                <h5 class="text-lg font-bold text-blue-950">Telefone e Email</h5>
+                                <p class="text-gray-600">(41) 99999-9999</p>
+                                <p class="text-gray-600">contato@dompedroi.edu.br</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-8 h-8 text-blue-950" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2c-4.41 0-8 3.59-8 8s3.59 8 8 8c1.32 0 2.56-.32 3.66-.9L18 22l-1.9-4.14c.91-1.1.91-2.52.02-3.62l-1.37-1.37c-1.12.92-2.54 1.43-4.14 1.43-4.41 0-8-3.59-8-8s3.59-8 8-8z"/>
+                            </svg>
+                            <div>
+                                <h5 class="text-lg font-bold text-blue-950">Endereço</h5>
+                                <p class="text-gray-600">Rua das Acácias, 1234 - Curitiba, PR</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lado direito com o formulário de contato -->
+                <div class="md:w-1/2 w-full p-8 rounded-xl shadow-xl bg-gray-50">
+                    <form action="#" method="POST" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Seu Nome Completo</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Seu Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Sua Mensagem</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-blue-950 text-white font-bold rounded-full shadow-lg hover:bg-gray-800 transition-colors">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos (carrossel) -->
+    <section class="py-20 p-4">
+        <div class="container mx-auto section-animation">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-blue-950">
+                O que Nossos Alunos e Pais Dizem.
+            </h2>
+            <div class="relative">
+                <div id="testimonial-carousel" class="testimonial-carousel flex overflow-x-auto snap-x space-x-8 px-4 py-8">
+                    <!-- Depoimento 1 -->
+                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                        <p class="text-xl italic mb-4">"O Colégio Dom Pedro I mudou a vida do meu filho. A disciplina e o foco acadêmico o transformaram em um aluno mais dedicado e responsável."</p>
+                        <p class="font-bold text-lg">- Maria, mãe de aluno</p>
+                    </div>
+                    <!-- Depoimento 2 -->
+                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                        <p class="text-xl italic mb-4">"Aqui, não aprendemos apenas história e matemática; aprendemos sobre respeito, ética e como nos tornarmos bons cidadãos. Recomendo de olhos fechados!"</p>
+                        <p class="font-bold text-lg">- João, ex-aluno</p>
+                    </div>
+                    <!-- Depoimento 3 -->
+                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                        <p class="text-xl italic mb-4">"A qualidade de ensino é excelente e a equipe é super atenciosa. Me sinto segura sabendo que minha filha está em um ambiente que realmente se importa com o futuro dela."</p>
+                        <p class="font-bold text-lg">- Ana, mãe de aluna</p>
+                    </div>
+                    <!-- Adicione mais depoimentos aqui, se desejar -->
+                </div>
+                <!-- Botão de navegação esquerda -->
+                <button id="testimonial-prev" class="carousel-button left-arrow">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                <!-- Botão de navegação direita -->
+                <button id="testimonial-next" class="carousel-button right-arrow">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato (roda pé) -->
+    <footer id="contato" class="bg-gray-800 text-white py-20 p-4">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Coluna 1: Logo e Descrição -->
+            <div class="flex flex-col items-start">
+                <a href="#" class="flex items-center space-x-2 mb-4">
+                    <img src="img/ccm.png" alt="Logo do Colégio Cívico Militar do Paraná" class="w-12 h-12 rounded-full border-2 border-white">
+                    <span class="text-white text-2xl font-black">
+                        C.C.M Dom Pedro I
+                    </span>
+                </a>
+                <p class="text-gray-400 mb-4">
+                    Educando mentes, formando cidadãos. Uma tradição de disciplina e excelência para o futuro de seus filhos.
+                </p>
+            </div>
+            <!-- Coluna 2: Links Rápidos -->
+            <div>
+                <h4 class="text-xl font-bold mb-4">Links Rápidos</h4>
+                <ul class="space-y-2">
+                    <li><a href="#sobre" class="hover:text-blue-400 transition-colors">Sobre Nós</a></li>
+                    <li><a href="#proposta" class="hover:text-blue-400 transition-colors">Proposta Pedagógica</a></li>
+                    <li><a href="#cursos" class="hover:text-blue-400 transition-colors">Cursos e Atividades</a></li>
+                    <li><a href="#fale-conosco" class="hover:text-blue-400 transition-colors">Fale Conosco</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 3: Contato -->
+            <div>
+                <h4 class="text-xl font-bold mb-4">Fale Conosco</h4>
+                <p class="text-gray-400">Rua das Acácias, 1234 - Curitiba, PR</p>
+                <p class="text-gray-400">Telefone: (41) 99999-9999</p>
+                <p class="text-gray-400">Email: contato@dompedroi.edu.br</p>
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="hover:text-blue-400 transition-colors">
+                                            </a>
+                    <a href="#" class="hover:text-blue-400 transition-colors">
+                                            </a>
+                    <a href="#" class="hover:text-blue-400 transition-colors">
+                                            </a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 text-center text-gray-500 text-sm">
+            &copy; 2025 Colégio Cívico Militar Dom Pedro I. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Scripts de Interação -->
+    <script>
+        // Animação de seções ao rolar a página
+        const sections = document.querySelectorAll('.section-animation');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Toggle do menu mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu-button');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Fechar o menu mobile ao clicar em um link
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Dropdowns de menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+            dropdownMenus.forEach(menu => {
+                // Acha o botão ou span que serve de "gatilho"
+                const trigger = menu.querySelector('span, button');
+                const content = menu.querySelector('.dropdown-menu-content');
+                
+                // Toggle a classe 'active' ao clicar no item do menu
+                trigger.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Impede que o clique se propague
+                    // Fecha outros dropdowns abertos
+                    dropdownMenus.forEach(otherMenu => {
+                        if (otherMenu !== menu) {
+                            otherMenu.querySelector('.dropdown-menu-content').classList.remove('active');
+                        }
+                    });
+                    // Togle a classe do dropdown atual
+                    content.classList.toggle('active');
+                });
+            });
+
+            // Fecha o dropdown se o usuário clicar em qualquer lugar fora dele
+            document.addEventListener('click', (event) => {
+                dropdownMenus.forEach(menu => {
+                    const content = menu.querySelector('.dropdown-menu-content');
+                    if (!menu.contains(event.target)) {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+
+            // Lógica para os botões de navegação dos carrosséis
+            function setupCarousel(carouselId, prevBtnId, nextBtnId) {
+                const carousel = document.getElementById(carouselId);
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+
+                // Função para atualizar o estado dos botões (habilitar/desabilitar)
+                const updateButtonState = () => {
+                    prevBtn.disabled = carousel.scrollLeft === 0;
+                    nextBtn.disabled = carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth;
+                };
+
+                // Evento de clique para o botão 'próximo'
+                nextBtn.addEventListener('click', () => {
+                    const cardWidth = carousel.querySelector('.activity-card, .testimonial-card').offsetWidth + 32; // 32 = 2rem para o espaçamento entre os cards
+                    carousel.scrollBy({
+                        left: cardWidth,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Evento de clique para o botão 'anterior'
+                prevBtn.addEventListener('click', () => {
+                    const cardWidth = carousel.querySelector('.activity-card, .testimonial-card').offsetWidth + 32; // 32 = 2rem para o espaçamento entre os cards
+                    carousel.scrollBy({
+                        left: -cardWidth,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Atualizar os botões quando o carrossel for rolado
+                carousel.addEventListener('scroll', updateButtonState);
+
+                // Inicializa o estado dos botões
+                updateButtonState();
+            }
+
+            // Configura os carrosséis
+            setupCarousel('activity-carousel', 'activity-prev', 'activity-next');
+            setupCarousel('testimonial-carousel', 'testimonial-prev', 'testimonial-next');
+        });
+    </script>
+</body>
+</html>
