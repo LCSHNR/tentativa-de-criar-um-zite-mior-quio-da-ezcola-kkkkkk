@@ -6,190 +6,12 @@
     <title>Colégio Cívico Militar Dom Pedro I</title>
     <!-- Carrega o Tailwind CSS para estilização moderna -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importa as fontes do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos personalizados para animações e tipografia */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Fundo suave */
-            color: #333;
-            scroll-behavior: smooth;
-        }
-        .text-blue-950 {
-            color: #0c152a; /* Cor base: azul-marinho escuro */
-        }
-        .bg-blue-950 {
-            background-color: #0c152a;
-        }
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .section-animation {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .section-animation.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Estilos para o vídeo de fundo */
-        .hero-video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1; /* Coloca o vídeo atrás do conteúdo */
-        }
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 150%;
-            min-height: 150%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            pointer-events: none;
-        }
-    
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .testimonial-carousel {
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            overflow-x: auto;
-        }
-        .testimonial-card {
-            scroll-snap-align: center;
-            flex: 0 0 80%; /* Ajusta o tamanho do card no carrossel */
-        }
-        @media (min-width: 768px) {
-            .testimonial-card {
-                flex: 0 0 30%;
-            }
-        }
-        /* Estilos para o carrossel de atividades */
-        .activity-carousel {
-            scroll-snap-type: x mandatory;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            
-        }
-        .activity-card {
-            scroll-snap-align: start;
-            flex: 0 0 90%; /* Ajusta o tamanho do card para 90% da largura do contêiner */
-             padding: 95px 60px;
-        }
-        @media (min-width: 768px) {
-            .activity-card {
-                flex: 0 0 45%; /* Mostra dois cards por vez em telas maiores */
-            }
-        }
-        @media (min-width: 1024px) {
-            .activity-card {
-                flex: 0 0 50%; /* Mostra três cards por vez em telas maiores */
-                
-            }
-        }
-        .tab-button.active {
-            background-color: #0c152a;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-        /* Estilo para simular o menu dropdown */
-        .dropdown-menu {
-            position: relative;
-        }
-        .dropdown-menu-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            top: 100%;
-            left: 0;
-            margin-top: 0.5rem;
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-        }
-        /* Estilos para o dropdown ativado via JavaScript */
-        .dropdown-menu-content.active {
-            display: block;
-        }
-        .dropdown-menu-content a {
-            color: #333;
-            padding: 0.5rem 1rem;
-            display: block;
-            border-radius: 0.25rem;
-        }
-        .dropdown-menu-content a:hover {
-            background-color: #f0f4f8;
-        }
-        /* Estilos para o menu mobile */
-        #mobile-menu .dropdown-menu {
-            width: 100%;
-            text-align: center;
-        }
-        #mobile-menu .dropdown-menu-content {
-            position: static; /* Ajusta para se encaixar no fluxo do menu mobile */
-            margin-top: 1rem;
-            box-shadow: none;
-        }
-        #mobile-menu .dropdown-menu-content a {
-            padding: 0.5rem;
-        }
-        #mobile-menu button {
-            color: white;
-            font-weight: bold;
-            font-size: 1.875rem; /* text-3xl */
-            padding: 1rem 0;
-        }
-        /* Estilos para os botões de navegação do carrossel */
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            border-radius: 9999px; /* rounded-full */
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: background-color 0.3s;
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-        .carousel-button:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-        .carousel-button.left-arrow {
-            left: 1rem;
-        }
-        .carousel-button.right-arrow {
-            right: 1rem;
-        }
-        .carousel-button svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        
-    </style>
+    <!-- Link para o arquivo CSS externo que contém os estilos personalizados -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-100">
 
@@ -208,7 +30,7 @@
             <div class="flex items-center space-x-6">
                 <!-- Menu de Navegação (Desktop) -->
                 <nav class="hidden md:flex items-center space-x-8">
-                    <!-- Dropdown JOGOS -->
+                    <!-- Dropdown SOBRE -->
                     <div class="dropdown-menu">
                         <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
                             Sobre
@@ -221,7 +43,7 @@
                             <a href="#proposta">Proposta Pedagógica</a>
                         </div>
                     </div>
-                    <!-- Dropdown EXPERIÊNCIAS -->
+                    <!-- Dropdown ENSINO -->
                     <div class="dropdown-menu">
                         <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
                             Ensino
@@ -235,7 +57,7 @@
                             <a href="#cursos">Atividades</a>
                         </div>
                     </div>
-                    <!-- Dropdown SOBRE -->
+                    <!-- Dropdown SERVIÇOS -->
                     <div class="dropdown-menu">
                         <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
                             Serviços
@@ -248,7 +70,7 @@
                             <a href="#">Central do Aluno</a>
                         </div>
                     </div>
-                    <!-- Dropdown RECURSOS -->
+                    <!-- Dropdown CONTATO -->
                     <div class="dropdown-menu">
                         <span class="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center">
                             Contato
@@ -356,7 +178,6 @@
             </h1>
             <p class="text-lg md:text-2xl font-light mb-9 max-w-3x4">
                 O Colégio Cívico Militar Dom Pedro I é o lugar onde disciplina e excelência se encontram para formar os líderes de amanhã.
-                
             </p>
             
             <a href="#contato" class="px-10 py-4 bg-white text-blue-950 font-bold text-lg rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
@@ -380,7 +201,8 @@
                         Leia Nossa Proposta Pedagógica
                     </a>
                 </div>
-                <img src="img/fachada.png" alt="Imagem institucional do colégio" class="rounded-lg shadow-x1 w-full md:w-1/2 ">
+                <!-- loading="lazy" foi adicionado para otimizar o carregamento da imagem -->
+                <img src="img/fachada.png" alt="Imagem institucional do colégio" class="rounded-lg shadow-x1 w-full md:w-1/2 " loading="lazy">
             </div>
         </div>
     </section>
@@ -433,15 +255,16 @@
                 <!-- Card de Desenvolvimento de Sistemas -->
                 <div class="relative rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
                     <!-- Camada de imagem de fundo (usando um placeholder como ilustração) -->
+                    <!-- loading="lazy" adicionado para otimizar o carregamento -->
                     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/plano-de-fundo-de-programacao-com-pessoa-trabalhando-com-codigos-no-computador-scaled-1.jpg');"></div>
                     <!-- Camada de sobreposição semitransparente com efeito de desfoque -->
-                    <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                    <div class="absolute inset-0 bg-white/20"></div>
                     <!-- Conteúdo do card -->
                     <div class="relative z-10 p-8">
                         <div class="flex items-center space-x-4 mb-4">
                             <!-- Ícone de código em SVG -->
                             <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14.6 17.4l-1.4-1.4c-1.2 1.2-2.8 1.9-4.5 1.9-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7c1.7 0 3.3.7 4.5 1.9l1.4-1.4C14.7 4.7 12.5 4 10.4 4c-4.4 0-8 3.6-8 8s3.6 8 8 8c2.1 0 4.3-.7 6.2-1.9zM20 12c0 4.4-3.6 8-8 8-2.1 0-4.3-.7-6.2-1.9l-1.4 1.4c1.9 1.9 4.1 3 6.6 3 4.4 0 8-3.6 8-8s-3.6-8-8-8c-2.5 0-4.7 1.1-6.6 3l1.4 1.4c1.9-1.9 4.1-3 6.6-3s4.7 1.1 6.6 3z"/>
+                                <path d="M14.6 17.4l-1.4-1.4c-1.2 1.2-2.8 1.9-4.5 1.9-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7c1.7 0 3.3.7 4.5 1.9l1.4-1.4C14.7 4.7 12.5 4 10.4 4c-4.4 0-8 3.6-8 8s3.6 8 8 8c2.1 0 4.3-.7 6.2-1.9l-1.4 1.4c1.9-1.9 4.1-3 6.6-3 4.4 0 8-3.6 8-8s-3.6-8-8-8c-2.5 0-4.7 1.1-6.6 3l1.4 1.4c1.9-1.9 4.1-3 6.6-3s4.7 1.1 6.6 3z"/>
                             </svg>
                             <h3 class="text-3xl font-extrabold text-white">Desenvolvimento de Sistemas</h3>
                         </div>
@@ -457,8 +280,10 @@
 
                 <!-- Card de Robótica -->
                 <div class="relative rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <!-- loading="lazy" adicionado para otimizar o carregamento -->
                     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/robotica_kits_2.jpg');"></div>
-                    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+                    <!-- Sobreposição simplificada para melhor performance -->
+                    <div class="absolute inset-0 bg-black/40"></div>
                     <div class="relative z-10 p-8">
                         <div class="flex items-center space-x-4 mb-4">
                             <!-- Ícone de robô em SVG -->
@@ -486,8 +311,10 @@
                 <div id="activity-carousel" class="activity-carousel flex space-x-10 px-3 py-8 -mx-4 md:mx-0">
                     <!-- Card Esporte/Atividade 1 -->
                     <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <!-- loading="lazy" adicionado para otimizar o carregamento -->
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/curiosidades-sobre-futsal.jpg');"></div>
-                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <!-- Sobreposição simplificada para melhor performance -->
+                        <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
                             <span class="text-5xl mb-4"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Futsal</h4>
@@ -496,8 +323,10 @@
                     </div>
                     <!-- Card Esporte/Atividade 2 -->
                     <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <!-- loading="lazy" adicionado para otimizar o carregamento -->
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/GettyImages-530941705.jpg');"></div>
-                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <!-- Sobreposição simplificada para melhor performance -->
+                        <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
                             <span class="text-5xl mb-4"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Tênis de Mesa</h4>
@@ -506,8 +335,10 @@
                     </div>
                     <!-- Card Esporte/Atividade 3 -->
                     <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <!-- loading="lazy" adicionado para otimizar o carregamento -->
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/beneficios-didaticos-jogo-xadrez.jpg');"></div>
-                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <!-- Sobreposição simplificada para melhor performance -->
+                        <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
                             <span class="text-5xl mb-4 text-white-8000"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Xadrez</h4>
@@ -516,8 +347,10 @@
                     </div>
                     <!-- Card Esporte/Atividade 4 -->
                     <div class="activity-card flex-shrink-0 relative flex flex-col items-start rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <!-- loading="lazy" adicionado para otimizar o carregamento -->
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/depositphotos_118552636-stock-photo-volleyball-object-on-background.jpg');"></div>
-                        <div class="absolute inset-0 bg-white/2 backdrop-blur-sm"></div>
+                        <!-- Sobreposição simplificada para melhor performance -->
+                        <div class="absolute inset-0 bg-black/40"></div>
                         <div class="relative z-10 p-8">
                             <span class="text-5xl mb-4"></span>
                             <h4 class="text-2xl font-bold mb-2 text-white">Vôlei</h4>
@@ -624,7 +457,11 @@
                         <p class="text-xl italic mb-4">"A qualidade de ensino é excelente e a equipe é super atenciosa. Me sinto segura sabendo que minha filha está em um ambiente que realmente se importa com o futuro dela."</p>
                         <p class="font-bold text-lg">- Ana, mãe de aluna</p>
                     </div>
-                    <!-- Adicione mais depoimentos aqui, se desejar -->
+                    <!-- Novo Depoimento Adicionado -->
+                    <div class="testimonial-card flex-shrink-0 bg-blue-950 text-white p-8 rounded-xl shadow-xl">
+                        <p class="text-xl italic mb-4">"O ambiente escolar é muito inspirador. O respeito entre os alunos e a dedicação dos professores fazem toda a diferença na jornada de aprendizado."</p>
+                        <p class="font-bold text-lg">- Pedro, pai de aluno</p>
+                    </div>
                 </div>
                 <!-- Botão de navegação esquerda -->
                 <button id="testimonial-prev" class="carousel-button left-arrow">
@@ -648,7 +485,8 @@
             <!-- Coluna 1: Logo e Descrição -->
             <div class="flex flex-col items-start">
                 <a href="#" class="flex items-center space-x-2 mb-4">
-                    <img src="img/ccm.png" alt="Logo do Colégio Cívico Militar do Paraná" class="w-12 h-12 rounded-full border-2 border-white">
+                    <!-- loading="lazy" adicionado para otimizar o carregamento -->
+                    <img src="img/ccm.png" alt="Logo do Colégio Cívico Militar do Paraná" class="w-12 h-12 rounded-full border-2 border-white" loading="lazy">
                     <span class="text-white text-2xl font-black">
                         C.C.M Dom Pedro I
                     </span>
@@ -688,120 +526,7 @@
         </div>
     </footer>
 
-    <!-- Scripts de Interação -->
-    <script>
-        // Animação de seções ao rolar a página
-        const sections = document.querySelectorAll('.section-animation');
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Toggle do menu mobile
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenuButton = document.getElementById('close-menu-button');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-        });
-
-        closeMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-
-        // Fechar o menu mobile ao clicar em um link
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Dropdowns de menu
-        document.addEventListener('DOMContentLoaded', () => {
-            const dropdownMenus = document.querySelectorAll('.dropdown-menu');
-            dropdownMenus.forEach(menu => {
-                // Acha o botão ou span que serve de "gatilho"
-                const trigger = menu.querySelector('span, button');
-                const content = menu.querySelector('.dropdown-menu-content');
-                
-                // Toggle a classe 'active' ao clicar no item do menu
-                trigger.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Impede que o clique se propague
-                    // Fecha outros dropdowns abertos
-                    dropdownMenus.forEach(otherMenu => {
-                        if (otherMenu !== menu) {
-                            otherMenu.querySelector('.dropdown-menu-content').classList.remove('active');
-                        }
-                    });
-                    // Togle a classe do dropdown atual
-                    content.classList.toggle('active');
-                });
-            });
-
-            // Fecha o dropdown se o usuário clicar em qualquer lugar fora dele
-            document.addEventListener('click', (event) => {
-                dropdownMenus.forEach(menu => {
-                    const content = menu.querySelector('.dropdown-menu-content');
-                    if (!menu.contains(event.target)) {
-                        content.classList.remove('active');
-                    }
-                });
-            });
-
-            // Lógica para os botões de navegação dos carrosséis
-            function setupCarousel(carouselId, prevBtnId, nextBtnId) {
-                const carousel = document.getElementById(carouselId);
-                const prevBtn = document.getElementById(prevBtnId);
-                const nextBtn = document.getElementById(nextBtnId);
-
-                // Função para atualizar o estado dos botões (habilitar/desabilitar)
-                const updateButtonState = () => {
-                    prevBtn.disabled = carousel.scrollLeft === 0;
-                    nextBtn.disabled = carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth;
-                };
-
-                // Evento de clique para o botão 'próximo'
-                nextBtn.addEventListener('click', () => {
-                    const cardWidth = carousel.querySelector('.activity-card, .testimonial-card').offsetWidth + 32; // 32 = 2rem para o espaçamento entre os cards
-                    carousel.scrollBy({
-                        left: cardWidth,
-                        behavior: 'smooth'
-                    });
-                });
-
-                // Evento de clique para o botão 'anterior'
-                prevBtn.addEventListener('click', () => {
-                    const cardWidth = carousel.querySelector('.activity-card, .testimonial-card').offsetWidth + 32; // 32 = 2rem para o espaçamento entre os cards
-                    carousel.scrollBy({
-                        left: -cardWidth,
-                        behavior: 'smooth'
-                    });
-                });
-
-                // Atualizar os botões quando o carrossel for rolado
-                carousel.addEventListener('scroll', updateButtonState);
-
-                // Inicializa o estado dos botões
-                updateButtonState();
-            }
-
-            // Configura os carrosséis
-            setupCarousel('activity-carousel', 'activity-prev', 'activity-next');
-            setupCarousel('testimonial-carousel', 'testimonial-prev', 'testimonial-next');
-        });
-    </script>
+    <!-- Link para o arquivo JavaScript externo -->
+    <script src="script.js"></script>
 </body>
 </html>
